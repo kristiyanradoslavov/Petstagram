@@ -1,5 +1,8 @@
 from django.contrib import admin
 
+from Petstagram.accounts.models import UserProfile
 
 
-
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    pass

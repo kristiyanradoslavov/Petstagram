@@ -1,18 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
+from pyperclip import copy # this is used to copy on the clipboard
 
 from Petstagram.common.models import Like
+from Petstagram.common.utils import photo_likes_count, apply_user_likes_photo, get_user_liked_photos
 from Petstagram.photos.models import PetPhoto
-
-
-def photo_likes_count(photo):
-    photo.likes_count = photo.like_set.count()
-    return photo
-
-
-def apply_user_likes_photo(photo):
-    # TODO: fix this the authentications is available
-    photo.is_liked = photo.likes_count > 0
-    return photo
 
 
 def home(request):
@@ -25,11 +16,6 @@ def home(request):
     return render(request, "common/home-page.html", context)
 
 
-def get_user_liked_photos(photo_id):
-    photo_likes = Like.objects.filter(to_photo=photo_id)
-    return photo_likes
-
-
 def like_functionality(request, photo_id):
     liked_photos = get_user_liked_photos(photo_id)
     if liked_photos:
@@ -39,3 +25,12 @@ def like_functionality(request, photo_id):
         like.save()
 
     return redirect(request.META['HTTP_REFERER'] + f"#{photo_id}")
+
+
+def share_functionality(request, photo_id):
+    copy(request.META['HTTP_HOST'] + resolve_url('photo details', photo_id))
+
+    return redirect(request.META['HTTP_REFERER'] + f'#{photo_id}')
+
+
+

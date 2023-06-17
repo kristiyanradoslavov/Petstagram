@@ -6,11 +6,35 @@ from .validators import validate_file_size
 
 
 class PetPhoto(models.Model):
-    photo = models.ImageField(validators=(validate_file_size,))
-    description = models.TextField(null=True, blank=True, max_length=300, validators=(MinLengthValidator(10),))
-    location = models.CharField(null=True, blank=True, max_length=30)
-    tagged_pets = models.ManyToManyField(Pet, blank=True)
-    date_of_publication = models.DateField(auto_now=True)
+    photo = models.ImageField(
+        validators=(
+            validate_file_size,
+        )
+    )
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+        max_length=300,
+        validators=(
+            MinLengthValidator(10),
+        )
+    )
+
+    location = models.CharField(
+        null=True,
+        blank=True,
+        max_length=30
+    )
+
+    tagged_pets = models.ManyToManyField(
+        Pet,
+        blank=True
+    )
+
+    date_of_publication = models.DateField(
+        auto_now=True
+    )
 
     def __str__(self):
         return f"{self.id} - {self.description}"

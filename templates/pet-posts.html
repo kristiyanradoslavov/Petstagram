@@ -8,7 +8,9 @@
         <div class="top">
             <div class="userDetails">
                 <!-- Link to User Profile Page -->
-                <a href="#">
+
+                {#TODO: add the correct PK when users are available #}
+                <a href="{% url 'show profile details' pk=1 %}">
                     <div class="profilepic">
                         <div class="profile_img">
                             <div class="image">
@@ -19,6 +21,8 @@
                 </a>
                 <h3>
                     <!-- Link to User Profile Page -->
+
+                    {#TODO: add the correct PK when users are available #}
                     <a href="{% url 'show profile details' pk=1 %}">
                         <!-- if user has first name and last name -->
                         Diyan Kalaydzhiev
@@ -96,7 +100,7 @@
                     <!-- End Like Button -->
 
                     <!-- Start Share Button -->
-                    <a href="">
+                    <a href="{% url 'share functionality' photo.id %}">
                         <svg aria-label="Share Post" class="_8-yf5 " color="#262626" fill="#262626"
                              height="24" role="img" viewBox="0 0 48 48" width="24">
                             <path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3
